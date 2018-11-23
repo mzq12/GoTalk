@@ -1,0 +1,48 @@
+//protoc --go_out=plugins=grpc,Mgoogle/protobuf/timestamp.proto=github.com/golang/protobuf/ptypes/timestamp:. chatting_group.proto
+syntax = "proto3";
+
+package pb;
+
+service ChattingGroup {
+
+    /*查询所有群信息*/
+    rpc FindAllGroup (FindAllGroupRequest) returns (FindAllGroupResponse) {
+    }
+
+    /*查询群成员信息*/
+    rpc GetGroupMembers (GetGroupMembersRequest) returns (GetGroupMembersResponse) {
+    }
+}
+
+message GroupInfo {
+    int64 gid = 1;
+    int64 appid = 2;
+    int64 uid = 3;
+    string g_name = 4;
+    bool super = 5;
+    string announcement = 6;
+}
+
+message GroupMember {
+    int64 gid = 1;
+    int64 uid = 2;
+    int64 in_time = 3;
+}
+
+message FindAllGroupRequest {
+
+}
+
+message FindAllGroupResponse {
+    repeated GroupInfo groups = 1;
+    int32 errorCode = 2;
+}
+
+message GetGroupMembersRequest {
+    int64 gid = 1;
+}
+
+message GetGroupMembersResponse {
+    repeated GroupMember members = 1;
+    int32 errorCode = 2;
+}
